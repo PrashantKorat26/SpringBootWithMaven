@@ -1,0 +1,22 @@
+version: "1"
+services:
+  springBootApp:
+    image: springboot-maven
+    container_name: springboot-c1
+    build: ./
+    ports:
+      - "5500:5500"
+    depends_on:
+      - postgresqldb
+    restart: on-failure
+
+
+  postgresqldb:
+    image: postgres
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
